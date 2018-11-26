@@ -34,7 +34,7 @@ export class RelativeOpeningTime extends React.Component {
 
     const closes_at = currentDate
       .clone()
-      .add(daysFromToday, 'days') // If the close is before the open, add a day
+      .add(daysFromToday + (schedule_day.opens_at > schedule_day.closes_at ? 1 : 0), 'days') // If the close is before the open, add a day
       .startOf('day')
       .add(closingTime.getHours(), 'hours')
       .add(closingTime.getMinutes(), 'minutes');

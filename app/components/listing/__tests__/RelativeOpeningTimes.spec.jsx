@@ -64,4 +64,12 @@ describe('<RelativeOpeningTimes />', () => {
     expect(comp.find('.relative-opening-time').text()).to.equal('Closed Until Tomorrow');
     expect(comp.find('.relative-opening-time').hasClass('status-red')).to.be.true;
   });
+
+  it('should display "Open now" for a schedule is open now, and has a closing time before open (tomorrow)', () => {
+    const date = moment().startOf('day').add(18, 'hours').add(30, 'minutes');
+    const schedule = getNamedSchedule('closes_tomorrow');
+    const comp = shallow(<RelativeOpeningTime schedule={schedule} currentDate={date} />);
+    expect(comp.find('.relative-opening-time').text()).to.equal('Open Now');
+    expect(comp.find('.relative-opening-time').hasClass('status-green')).to.be.true;
+  });
 });
